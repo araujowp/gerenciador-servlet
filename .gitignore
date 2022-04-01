@@ -25,3 +25,4 @@ hs_err_pid*
 ### configurações do eclipse
 .settings/
 /.metadata/
+/build/
