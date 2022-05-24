@@ -9,11 +9,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns="/ola")
+@WebServlet(urlPatterns="/ola", loadOnStartup = 1)
 public class OiMundoServlet extends HttpServlet  {
 
 	private static final long serialVersionUID = 1L;
 
+	public OiMundoServlet() {
+		System.out.println("olha o loadOnStartup em ação");
+	}
+	
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         
