@@ -7,22 +7,16 @@ import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import br.com.alura.gerenciador.modelo.Banco;
 import br.com.alura.gerenciador.modelo.Empresa;
 
-public class EditaEmpresa {
+public class EditaEmpresa implements Acao {
 
-	private HttpServletRequest request;
-	private HttpServletResponse response;
-
-	public EditaEmpresa(HttpServletRequest request, HttpServletResponse response) {
-		this.request = request;
-		this.response = response;
+	public EditaEmpresa() {
 	}
 
-	public void executar() throws IOException, ServletException {
+	public String executar(HttpServletRequest request) throws IOException, ServletException {
         System.out.println("cheguei no executar do edita empresa");
 
         String nomeEmpresa = request.getParameter("nome");
@@ -45,7 +39,8 @@ public class EditaEmpresa {
         empresa.setNome(nomeEmpresa);
         empresa.setDataAbertura(dataAbertura);
         
-        response.sendRedirect("empresa?acao=listaEmpresas");		
+//        response.sendRedirect("redirect:empresa?acao=listaEmpresas");
+		return "redirect:empresa?acao=ListaEmpresas";		
 	}
 
 }
