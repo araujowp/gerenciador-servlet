@@ -1,6 +1,6 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<c:url value="/empresa" var="linkServletNovaEmpresa"/>
+<c:url value="/entrada" var="linkServletNovaEmpresa"/>
 
 <!DOCTYPE html>
 <html>
@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<c:import url="logout-parcial.jsp"></c:import>
 
     <form action="${linkServletNovaEmpresa }" method="post">
 

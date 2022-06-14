@@ -17,7 +17,6 @@ public class EditaEmpresa implements Acao {
 	}
 
 	public String executar(HttpServletRequest request) throws IOException, ServletException {
-        System.out.println("cheguei no executar do edita empresa");
 
         String nomeEmpresa = request.getParameter("nome");
         String paramDataEmpresa = request.getParameter("data");
@@ -40,7 +39,7 @@ public class EditaEmpresa implements Acao {
         empresa.setDataAbertura(dataAbertura);
         
 //        response.sendRedirect("redirect:empresa?acao=listaEmpresas");
-		return "redirect:empresa?acao=ListaEmpresas";		
+		return "redirect:entrada?acao=ListaEmpresas";		
 	}
 
 }

@@ -15,12 +15,11 @@ public class RemoveEmpresa implements Acao{
 	public String executar(HttpServletRequest request) throws ServletException, IOException {
 		String paramId = request.getParameter("id");
 		Integer id = Integer.valueOf(paramId);
-		System.out.println("nosso id é: " + id);
 		
 		Banco banco = new Banco();
 		banco.removeEmpresa(id);
 		
-		return "redirect:empresa?acao=ListaEmpresas";
+		return "redirect:entrada?acao=ListaEmpresas";
 	}
 
 }

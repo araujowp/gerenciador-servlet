@@ -9,7 +9,13 @@
 <title>Lista de empresas - Java Standard Taglib </title>
 </head>
 <body>
+	<c:import url="logout-parcial.jsp"></c:import>
 
+    Usuario Logado: ${usuarioLogado.login }
+
+    <br>
+    <br>
+    <br>
     <c:if test="${not empty empresa}">
             Empresa ${ empresa } cadastrada com sucesso!
     </c:if>
@@ -20,11 +26,12 @@
         <c:forEach items="${empresas}" var="empresa">
 			<li>${empresa.nome}- <fmt:formatDate
 					value="${empresa.dataAbertura}" pattern="dd/MM/yyyy" /> 
-					<a href="empresa?acao=MostraEmpresa&id=${empresa.id}"> editar </a>&nbsp;
-					<a href="empresa?acao=RemoveEmpresa&id=${empresa.id}"> remover </a>
+					<a href="entrada?acao=MostraEmpresa&id=${empresa.id}"> editar </a>&nbsp;
+					<a href="entrada?acao=RemoveEmpresa&id=${empresa.id}"> remover </a>
 			</li>
 		</c:forEach>
     </ul>
-
+    <br>
+	<a href="entrada?acao=NovaEmpresaForm"> - Nova -</a>
 </body>
 </html>

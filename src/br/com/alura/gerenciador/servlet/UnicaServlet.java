@@ -8,19 +8,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import br.com.alura.gerenciador.acao.Acao;
-import br.com.alura.gerenciador.acao.EditaEmpresa;
-import br.com.alura.gerenciador.acao.ListaEmpresas;
-import br.com.alura.gerenciador.acao.MostraEmpresa;
-import br.com.alura.gerenciador.acao.NovaEmpresa;
-import br.com.alura.gerenciador.acao.NovaEmpresaForm;
-import br.com.alura.gerenciador.acao.RemoveEmpresa;
 
 /**
  * Servlet implementation class UnicaServlet
  */
-@WebServlet(name = "Empresa", urlPatterns = { "/empresa" })
+@WebServlet(name = "Entrada", urlPatterns = { "/entrada" })
 public class UnicaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -28,7 +23,19 @@ public class UnicaServlet extends HttpServlet {
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		String parametro = request.getParameter("acao");
+
+		HttpSession sessao = request.getSession();
+		
+		boolean usuarioLogado = (sessao.getAttribute("usuarioLogado") == null);
+		boolean acaoProtegida  = !(parametro.equals("Login") || parametro.equals("LoginForm"));
+		
+		if(acaoProtegida && usuarioLogado) {
+			response.sendRedirect("entrada?acao=LoginForm");
+			return;
+		}
+		
 		
 		String nome  = null;
 		try {
@@ -38,28 +45,6 @@ public class UnicaServlet extends HttpServlet {
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
 			throw(new ServletException(e));
 		} 
-		
-//		if(parametro.equals("listaEmpresas")) {s
-//			ListaEmpresas lista = new ListaEmpresas();
-//			nome = lista.executar(request);
-//		}else if(parametro.equals("removeEmpresa")) {
-//			RemoveEmpresa acao = new RemoveEmpresa();
-//			nome = acao.executar(request);
-//		}else if(parametro.equals("novaEmpresa")) {
-//			NovaEmpresa acao = new NovaEmpresa();
-//			nome = acao.executar(request);
-//		}else if(parametro.equals("editaEmpresa")) {
-//			EditaEmpresa acao = new EditaEmpresa();
-//			nome = acao.executar(request);
-//		}else if(parametro.equals("mostraEmpresa")) {
-//		    MostraEmpresa acao = new MostraEmpresa();
-//		    nome = acao.executar(request);
-//		}else if(parametro.equals("novaEmpresaForm")){
-//			NovaEmpresaForm acao = new NovaEmpresaForm();
-//			nome = acao.executar(request);
-//		}else {
-//			System.out.println("parametro acao invalida");
-//		}
 		
 		String[] tipoEEndereco = nome.split(":");
 	    if(tipoEEndereco[0].equals("forward")) {
