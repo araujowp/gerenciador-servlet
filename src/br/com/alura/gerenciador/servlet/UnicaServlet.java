@@ -4,18 +4,16 @@ import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import br.com.alura.gerenciador.acao.Acao;
 
 /**
  * Servlet implementation class UnicaServlet
  */
-@WebServlet(name = "Entrada", urlPatterns = { "/entrada" })
+//@WebServlet(name = "Entrada", urlPatterns = { "/entrada" }) usaremos no web.xml
 public class UnicaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -25,17 +23,6 @@ public class UnicaServlet extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String parametro = request.getParameter("acao");
-
-		HttpSession sessao = request.getSession();
-		
-		boolean usuarioLogado = (sessao.getAttribute("usuarioLogado") == null);
-		boolean acaoProtegida  = !(parametro.equals("Login") || parametro.equals("LoginForm"));
-		
-		if(acaoProtegida && usuarioLogado) {
-			response.sendRedirect("entrada?acao=LoginForm");
-			return;
-		}
-		
 		
 		String nome  = null;
 		try {
